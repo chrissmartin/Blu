@@ -34,7 +34,6 @@ new Vue({
     currentAccount: '',
     loading: true,
     contract,
-    address:'',
   },
   /**
    * calls functions for getting

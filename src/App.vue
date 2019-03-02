@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <div style="display: flex; flex-direction: column;">
-      <h3>User Address : {{currentAddress}}</h3>
+      <h1 class="text-center">Blu.</h1>
+      <p class="text-center">User Address : {{this.$root.$data.currentAccount}}</p>
       <!-- Upload Interface -->
       <div id="newPost">
       <button class="up-btn" v-on:click="show = !show"><p class="plus">+</p></button>
@@ -82,25 +83,17 @@ export default {
       show: false,
       buffer: '',
       caption: '',
-      currentAddress: '',
     };
   },
   created:function(){
 
     console.log("Hi");
-    currentAddress = this.$root.$data.currentAccount;
-    console.log(currentAddress);
   },
 
   methods: {
     /* used to catch chosen image &
      * convert it to ArrayBuffer.
      */
-
-    //testing
-   /* readPost(){
-      return web3.eth.Contract.getHash(1);
-    },*/
 
     
     captureFile(file) {

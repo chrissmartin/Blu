@@ -1,6 +1,6 @@
 # Blu. - Social Network dApp
 
-A simple Ethereum-based [Instagram](https://www.instagram.com/)-like decentralized application (dapp) where you can post images, text, and view it. This dApp also shows all the behind the scenes working of blockchain.
+A simple Ethereum-based Instagram-like decentralized application (dapp) where you can post images, text, and view it. This dApp also shows all the behind the scenes working of blockchain.
 
 ---
 
@@ -33,3 +33,7 @@ npm run dev
 * [Vue.js](https://vuejs.org/) - The Javascript framework used
 * [web3.js](https://github.com/ethereum/web3.js/) - Javascript library used to interact with the Ethereum blockchain
 * [IPFS](https://docs.ipfs.io/) - InterPlanetary File System for peer-to-peer decentralized data storage. 
+
+## Based on
+
+* Openberry [Instagram-dApp](https://github.com/openberry-ac/instagram)

@@ -4,12 +4,14 @@
       <h1 class="text-center">Blu.</h1>
       <p class="text-center">User Address : {{this.$root.$data.currentAccount}}</p>
       <!-- Upload Interface -->
+            
       <div id="newPost">
-      <button class="up-btn" v-on:click="show = !show"><p class="plus">+</p></button>
+      <b-button v-b-modal.upload-modal class="up-btn" v-on:click="show = !show"><p class="plus">+</p></b-button>
+      <b-modal id="upload-modal" title="Upload Image">
       <transition name="fade">     
       <div id="upload" v-if="show">
         <div v-if="this.$root.$data.loading === false">
-          <h1>New Post</h1>
+          <h4>New Post</h4>
 
           <!-- Form for file choose, caption text and submission -->
           <form
@@ -49,10 +51,11 @@
         </div>
       </div>
       </transition>
+      </b-modal>
       </div>
 
       <!-- Posts Interface -->
-      <ul class="home-list">
+      <ul class="home-list" align-h="center">
         <li
           v-for="item in this.$root.$data.currentPosts"
           :key="item.key"
@@ -63,8 +66,13 @@
             border-variant="secondary"
             :img-src="item.src"
           >
-            <p class="home-card-text"> Caption : {{ item.caption }}</p>
-            
+          <div>
+              <p class="home-card-text"> Caption : {{ item.caption }}</p>
+              <b>Hashes</b>
+              <p><b> Caption Hash: </b>{{ item.tHash }}</p>
+              <p><b>Image Hash: </b> {{ item.iHash }}</p>
+              <p><b>Owner Address: </b>{{ item.ownHash }}</p>
+          </div>
           </b-card>
         </li>
       </ul>
@@ -88,6 +96,7 @@ export default {
   created:function(){
 
     console.log("Hi");
+    
   },
 
   methods: {
@@ -125,26 +134,23 @@ export default {
       ipfs.add(this.buffer)
         .then((hashedImg) => {
           imgHash = hashedImg[0].hash;
-          //imgHash_2 = imgHash;
-          //console.log("Img Hash: "+imgHash_2);
+          
           return this.convertToBuffer(this.caption);
         }).then(bufferDesc => ipfs.add(bufferDesc)
           .then(hashedText => hashedText[0].hash)).then((textHash) => {
-          //textHash_2 = textHash; 
-          //console.log("Text Hash: "+textHash);  
+           
           this.$root.contract.methods
             .sendHash(imgHash, textHash)
             .send({ from: this.$root.currentAccount },
               (error, transactionHash) => {
-                //transHash = transactionHash;
-                //console.log("Transaction Hash: "+transactionHash);
+                
                 if (typeof transactionHash !== 'undefined') {
                   //alert('Storing on Ethereum...');
-                  console.log("Alert-1  "+this.$root.currentAccount);
+                  console.log("Storing on Ethereum..."+this.$root.currentAccount);
                   this.$root.contract.once('NewPost',
                     { from: this.$root.currentAccount },
                     () => {
-                      console.log("Alert-2");
+                      console.log("After eth store");
                       this.$root.getPosts();
                       alert('Operation Finished! Refetching...');
                     });
@@ -159,7 +165,7 @@ export default {
     handleOk() {
       if (!this.buffer || !this.caption) {
         alert('Please fill in the information.');
-        console.log(this.$root.$data);
+        
         
       } else {
         this.onSubmit();
@@ -172,7 +178,7 @@ export default {
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
@@ -180,7 +186,9 @@ export default {
   color: #2c3e50;
   margin-top: 3%;
 }
-
+#newPost{
+  margin:auto;
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
@@ -209,10 +217,10 @@ export default {
 .home-list{
   padding: 0;
   list-style: none;
+  margin: auto;
 }
 
 .home-card-text {
-  text-align: justify;
   margin-top: 10px;
 }
 
@@ -223,7 +231,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-bottom: 5%;
-  width: 500px;
 }
 .up-btn{
   width: 55px;
@@ -289,6 +296,6 @@ button:focus {outline:0;}
 .border-secondary {
     border-color: #ffffff!important;
     border: 0px;
-    box-shadow: 0px 2px 5px #666;
+    box-shadow: 1px 1px 7px #dadada;
 }
 </style>

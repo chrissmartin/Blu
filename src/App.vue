@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <div style="display: flex; flex-direction: column;">
-      <h1 class="text-center">Blu.</h1>
+    <h1 class="logo-b">B</h1><h1 class="logo-lu">lu.</h1>
+    <div class="sidenav">
+    </div>
+    <div class="account-circle"><i class="fas fa-igloo"></i></div>
+    <div id="feed" style="display: flex; flex-direction: column;">
+
       <p class="text-center">User Address : {{this.$root.$data.currentAccount}}</p>
       <!-- Upload Interface -->
             
@@ -68,6 +72,7 @@
           >
           <div>
               <p class="home-card-text"> Caption : {{ item.caption }}</p>
+              
               <b>Hashes</b>
               <p><b> Caption Hash: </b>{{ item.tHash }}</p>
               <p><b>Image Hash: </b> {{ item.iHash }}</p>
@@ -177,11 +182,41 @@ export default {
 </script>
 
 <style>
+.logo-b{
+  position: fixed;
+  z-index: 2;
+  top: 1px;
+  left: 45px;
+  color: #ffffff;
+  font-size: 90px;
+}
+.logo-lu{
+  position: fixed;
+  z-index: 2;
+  top: 10px;
+  left: 100px;
+  color: #00ABE7;
+  font-size: 80px;
+}
+.sidenav {
+  height: 100%;
+  width: 100px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #00ABE7;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
 #app {
   
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
+  
+}
+#feed{
+  
   justify-content: center;
   color: #2c3e50;
   margin-top: 3%;
@@ -204,12 +239,12 @@ export default {
 .card img {
   object-fit: cover;
   height: 500px;
-  width: 500px;
+  width: 700px;
 }
 
 .card {
   text-align: left;
-  width: 500px;
+  width: 700px;
   margin-bottom: 20px;
 }
 
@@ -225,7 +260,7 @@ export default {
 }
 
 #upload {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, sans-serif, Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -233,22 +268,56 @@ export default {
   margin-bottom: 5%;
 }
 .up-btn{
-  width: 55px;
-  height: 55px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background: #db4437;
+  background: #00ABE7;
   position: fixed;
   bottom: 30px;
   right: 30px;
   cursor: pointer;
   border: 0px;
-  box-shadow: 0px 2px 5px #666;
+  box-shadow: 0px 13px 13px rgba(0, 0, 0, 0.16);
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #00ABE7;
+    border-color: #fff0;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #00ABE7;
+    border-color: #ffffff00;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #00ABE7;
+    border-color: #ffffff00;
+}
+
+.btn-secondary.focus, .btn-secondary:focus {
+    box-shadow: none;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #00ABE7;
+    border-color: #ffffff00;
+}
+
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #00ABE7;
+    border-color: #ffffff00;
+}
+
 .up-btn:active{outline:0;}
 button:focus {outline:0;}
 .plus{
   color: white;
-  position: absolute;
   top: 0;
   display: block;
   bottom: 0;
@@ -259,7 +328,9 @@ button:focus {outline:0;}
   margin: 0;
   line-height: 55px;
   font-size: 38px;
-  font-family: 'Roboto';
+  font-family: Helvetica, sans-serif, Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-weight: 300;
   animation: plus-out 0.3s;
   transition: all 0.3s;
@@ -270,8 +341,8 @@ button:focus {outline:0;}
   animation-fill-mode: forwards;
 }
 
-.up-btn:hover{
-    background: #db4437;
+.up-btn:hover {
+    background: #00ABE7;
     text-decoration: none;
     text-align: center;
     
@@ -296,6 +367,6 @@ button:focus {outline:0;}
 .border-secondary {
     border-color: #ffffff!important;
     border: 0px;
-    box-shadow: 1px 1px 7px #dadada;
+    box-shadow: 6px 15px 20px 3px #f8f9fa;
 }
 </style>

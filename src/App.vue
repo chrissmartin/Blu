@@ -57,7 +57,8 @@
       </transition>
       </b-modal>
       </div>
-
+      
+      
       <!-- Posts Interface -->
       <ul class="home-list" align-h="center">
         <li
@@ -65,18 +66,32 @@
           :key="item.key"
           :item="item"
         >
+        <!--Hashmodal-->
+          <b-modal id="hash-modal" title="Hashes">
+                      <p><b> Caption Hash: </b>{{ item.tHash }}</p>
+                      <p><b>Image Hash: </b> {{ item.iHash }}</p>
+                      <p><b>Owner Address: </b>{{ item.ownHash }}</p>
+          </b-modal>
+                  <!--Hashmodal-->
+          <b-modal id="img-link-modal" title="Image URL">
+                      <p><b>https://ipfs.infura.io/ipfs/</b>{{item.iHash}}</p>
+          </b-modal>
           <!-- Card UI for post's image & caption text -->
           <b-card
             border-variant="secondary"
             :img-src="item.src"
           >
           <div>
+            <b-dropdown variant="link" size="lg" no-caret id="post-option">
+              <template slot="button-content" >&#x22EE;<span class="sr-only">Options</span></template>
+              <b-dropdown-item v-b-modal.hash-modal>Hashes</b-dropdown-item>
+              <b-dropdown-item v-b-modal.img-link-modal>Image Link</b-dropdown-item>
+            </b-dropdown>
+            
+          </div>          
+          <div>
               <p class="home-card-text"> Caption : {{ item.caption }}</p>
-              
-              <b>Hashes</b>
-              <p><b> Caption Hash: </b>{{ item.tHash }}</p>
-              <p><b>Image Hash: </b> {{ item.iHash }}</p>
-              <p><b>Owner Address: </b>{{ item.ownHash }}</p>
+                       
           </div>
           </b-card>
         </li>
@@ -215,10 +230,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   
 }
+.modal-content{
+  border:  none;
+}
 #feed{
   
   justify-content: center;
-  color: #2c3e50;
+  color: #212529;
   margin-top: 3%;
 }
 #newPost{
@@ -238,13 +256,13 @@ export default {
 
 .card img {
   object-fit: cover;
-  height: 500px;
-  width: 700px;
+  height: 375px;
+  width: 500px;
 }
 
 .card {
   text-align: left;
-  width: 700px;
+  width: 500px;
   margin-bottom: 20px;
 }
 
@@ -258,6 +276,18 @@ export default {
 .home-card-text {
   margin-top: 10px;
 }
+
+#post-option *{
+  text-decoration: none;
+  margin-right: 0px;
+  top: -70px;
+  left: 440px;
+  color: #000000;
+}
+#img-link-modal{
+  max-width: max-content;
+}
+
 
 #upload {
   font-family: Helvetica, sans-serif, Arial;
@@ -279,7 +309,9 @@ export default {
   border: 0px;
   box-shadow: 0px 13px 13px rgba(0, 0, 0, 0.16);
 }
-
+.btn:focus,.btn:active{
+  text-decoration: none;
+}
 .btn-primary {
     color: #fff;
     background-color: #00ABE7;
@@ -334,9 +366,10 @@ button:focus {outline:0;}
   font-weight: 300;
   animation: plus-out 0.3s;
   transition: all 0.3s;
+  outline: none;
 }
 
-.up-btn:hover .plus{
+.up-btn:hover .plus:hover{
   animation: plus-in 0.15s linear;
   animation-fill-mode: forwards;
 }

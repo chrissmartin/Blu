@@ -86,7 +86,7 @@ new Vue({
         const postHashes = await Promise.all(hashes);
 
         for (let i = 0; i < postHashes.length; i += 1) {
-          captions.push(fetch(`https://gateway.ipfs.io/ipfs/${postHashes[i].text}`)
+          captions.push(fetch(`https://ipfs.infura.io/ipfs/${postHashes[i].text}`)
             .then(res => res.text()));
         }
         const postCaptions = await Promise.all(captions);
@@ -96,7 +96,7 @@ new Vue({
             id: i,
             key: `key${i}`,
             caption: postCaptions[i],
-            src: `https://gateway.ipfs.io/ipfs/${postHashes[i].img}`,
+            src: `https://ipfs.infura.io/ipfs/${postHashes[i].img}`,
             tHash: postHashes[i].text,
             iHash: postHashes[i].img,
             ownHash: postHashes[i].owner

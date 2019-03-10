@@ -4,7 +4,7 @@ A simple Ethereum-based Instagram-like decentralized application (dapp) where yo
 
 ---
 
-![Blu](https://i.imgur.com/vFo24uDl.jpg)
+![Blu](https://i.imgur.com/vFo24uDh.jpg)
 
 ## Prerequisites
 

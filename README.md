@@ -1,6 +1,6 @@
 # Blu. - Social Network dApp
 
-A simple Ethereum-based Instagram-like decentralized application (dapp) where you can post images, text, and view it. This dApp also shows all the behind the scenes working of blockchain.
+A simple Ethereum-based Instagram-like decentralized application (dapp) where you can post images, text, and view it. This dApp also shows all the behind the scenes working of IPFS and Ethereum blockchain.
 
 ---
 

@@ -34,6 +34,11 @@ npm run dev
 * [web3.js](https://github.com/ethereum/web3.js/) - Javascript library used to interact with the Ethereum blockchain
 * [IPFS](https://docs.ipfs.io/) - InterPlanetary File System for peer-to-peer decentralized data storage. 
 
+## Project Developers
+* Chriss Martin - Blockchain and Web Developer 
+* Amit Joseph   - Web Developer
+* Alen George   - Web Developer
+* Abin Mathew   - UX/UI Design
 ## Based on
 
 * Openberry [Instagram-dApp](https://github.com/openberry-ac/instagram)

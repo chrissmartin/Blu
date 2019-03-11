@@ -400,6 +400,6 @@ button:focus {outline:0;}
 .border-secondary {
     border-color: #ffffff!important;
     border: 0px;
-    box-shadow: 6px 15px 20px 3px #f8f9fa;
+    box-shadow: 0px 8px 20px 0px #ededed;
 }
 </style>

@@ -11,12 +11,10 @@
             
       <div id="newPost">
       <b-button v-b-modal.upload-modal class="up-btn" v-on:click="show = !show"><p class="plus">+</p></b-button>
-      <b-modal id="upload-modal" title="Upload Image">
+      <b-modal id="upload-modal" title="New Post">
       <transition name="fade">     
       <div id="upload" v-if="show">
         <div v-if="this.$root.$data.loading === false">
-          <h4>New Post</h4>
-
           <!-- Form for file choose, caption text and submission -->
           <form
             class="margin-sm"
@@ -58,7 +56,16 @@
       </b-modal>
       </div>
       
-      
+      <!--Hashmodal-->
+          <b-modal id="hash-modal" title="Hashes">
+                      <p><b> Caption Hash: </b>{{ selectedUser.tHash }}</p>
+                      <p><b>Image Hash: </b> {{ selectedUser.iHash }}</p>
+                      <p><b>Owner Address: </b>{{ selectedUser.ownHash }}</p>
+          </b-modal>
+      <!--IMG Hashmodal-->
+          <b-modal id="img-link-modal" title="Image URL">
+                      <p><b>https://ipfs.infura.io/ipfs/</b>{{selectedUser.iHash}}</p>
+          </b-modal>
       <!-- Posts Interface -->
       <ul class="home-list" align-h="center">
         <li
@@ -66,16 +73,6 @@
           :key="item.key"
           :item="item"
         >
-        <!--Hashmodal-->
-          <b-modal id="hash-modal" title="Hashes">
-                      <p><b> Caption Hash: </b>{{ item.tHash }}</p>
-                      <p><b>Image Hash: </b> {{ item.iHash }}</p>
-                      <p><b>Owner Address: </b>{{ item.ownHash }}</p>
-          </b-modal>
-                  <!--Hashmodal-->
-          <b-modal id="img-link-modal" title="Image URL">
-                      <p><b>https://ipfs.infura.io/ipfs/</b>{{item.iHash}}</p>
-          </b-modal>
           <!-- Card UI for post's image & caption text -->
           <b-card
             border-variant="secondary"
@@ -84,8 +81,8 @@
           <div>
             <b-dropdown variant="link" size="lg" no-caret id="post-option">
               <template slot="button-content" >&#x22EE;<span class="sr-only">Options</span></template>
-              <b-dropdown-item v-b-modal.hash-modal>Hashes</b-dropdown-item>
-              <b-dropdown-item v-b-modal.img-link-modal>Image Link</b-dropdown-item>
+              <b-dropdown-item v-b-modal.hash-modal @click="sendInfo(item)">Hashes</b-dropdown-item>
+              <b-dropdown-item v-b-modal.img-link-modal @click="sendInfo(item)">Image Link</b-dropdown-item>
             </b-dropdown>
             
           </div>          
@@ -111,6 +108,7 @@ export default {
       show: false,
       buffer: '',
       caption: '',
+      selectedUser: '',
     };
   },
   created:function(){
@@ -120,11 +118,14 @@ export default {
   },
 
   methods: {
+
+    sendInfo(item) {
+        this.selectedUser = item;
+    },
     /* used to catch chosen image &
      * convert it to ArrayBuffer.
      */
 
-    
     captureFile(file) {
       const reader = new FileReader();
       if (typeof file !== 'undefined') {

@@ -24,7 +24,9 @@ export default {
   name: 'App',
   // data variables
   data() {
-
+    return {
+      
+    };
   },
   
   created:function(){
@@ -34,6 +36,7 @@ export default {
   },
 
   methods: {
+    
   },
 }; 
 </script>

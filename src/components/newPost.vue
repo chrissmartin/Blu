@@ -3,7 +3,7 @@
   <!-- Upload Interface -->   
 
   <div id="newPost">
-  <b-button v-b-modal.upload-modal class="up-btn" v-on:click="show = !show"><p class="plus">+</p></b-button>
+  <b-button v-b-modal.upload-modal class="up-btn" v-on:click="show = true"><p class="plus">+</p></b-button>
   <b-modal id="upload-modal" title="New Post">
   <transition name="fade">     
   <div id="upload" v-if="show">
@@ -61,6 +61,7 @@ export default {
       show: false,
       buffer: '',
       caption: '',
+      componentKey: 0,
     };
   },
   created:function(){
@@ -74,7 +75,9 @@ export default {
     /* used to catch chosen image &
      * convert it to ArrayBuffer.
      */
-
+    forceRerender() {
+          this.componentKey += 1;  
+        },
     captureFile(file) {
       const reader = new FileReader();
       if (typeof file !== 'undefined') {
@@ -97,33 +100,23 @@ export default {
      * it in the Contract via sendHash().
      */
     onSubmit() {
-      //alert('Uploading on IPFS...');
       this.$root.loading = true;
       let imgHash;
-      
       ipfs.add(this.buffer)
         .then((hashedImg) => {
-          imgHash = hashedImg[0].hash;
-          
+
+          imgHash = hashedImg[0].hash;  
           return this.convertToBuffer(this.caption);
         }).then(bufferDesc => ipfs.add(bufferDesc)
           .then(hashedText => hashedText[0].hash)).then((textHash) => {
-           
+
           this.$root.contract.methods
             .sendHash(imgHash, textHash)
             .send({ from: this.$root.currentAccount },
               (error, transactionHash) => {
                 
                 if (typeof transactionHash !== 'undefined') {
-                  //alert('Storing on Ethereum...');
-                  console.log("Storing on Ethereum..."+this.$root.currentAccount);
-                  this.$root.contract.once('NewPost',
-                    { from: this.$root.currentAccount },
-                    () => {
-                      console.log("After eth store");
-                      this.$root.getPosts();
-                      alert('Operation Finished! Refetching...');
-                    });
+                  forceRerender();
                 } else this.$root.loading = false;
               });
         });

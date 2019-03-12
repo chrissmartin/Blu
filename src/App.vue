@@ -3,9 +3,7 @@
     <h1 class="logo-b">B</h1><h1 class="logo-lu">lu.</h1>
     <div class="sidenav">
     </div>
-    <div class="account-circle"><i class="fas fa-igloo"></i></div>
     <div id="feed" style="display: flex; flex-direction: column;">
-
       <p class="text-center">User Address : {{this.$root.$data.currentAccount}}</p>
       <!-- Upload Interface -->
             
@@ -281,7 +279,7 @@ export default {
 #post-option *{
   text-decoration: none;
   margin-right: 0px;
-  top: -70px;
+  top: -20px;
   left: 440px;
   color: #000000;
 }

@@ -36,7 +36,7 @@ npm run dev
 
 ## Project Developers
 * Chriss Martin - Blockchain and Web Developer 
-* Amit Joseph   - Web Developer
+* Amit Joseph   - Blockchain and Web Developer 
 * Alen George   - Web Developer
 * Abin Mathew   - UX/UI Design
 ## Based on

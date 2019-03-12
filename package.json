@@ -1,8 +1,8 @@
 {
-  "name": "instagram_v1",
-  "description": "A Vue.js project",
+  "name": "Blu.",
+  "description": "A Social-Network on Blockchain",
   "version": "1.0.0",
-  "author": "Markus Viola <markus.xamuel.viola@gmail.com>",
+  "author": "Chriss Martin <thechrissmartin@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",

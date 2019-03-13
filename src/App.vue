@@ -13,7 +13,7 @@
       <b-button v-b-modal.upload-modal class="up-btn" v-on:click="show = !show"><p class="plus">+</p></b-button>
       <b-modal id="upload-modal" title="New Post">
       <transition name="fade">     
-      <div id="upload" v-if="show">
+      <div id="upload" v-if="">
         <div v-if="this.$root.$data.loading === false">
           <!-- Form for file choose, caption text and submission -->
           <form
@@ -119,6 +119,7 @@ export default {
 
   methods: {
 
+   
     sendInfo(item) {
         this.selectedUser = item;
     },

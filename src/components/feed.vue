@@ -2,8 +2,7 @@
 <template>
     <div id="feed" style="display: flex; flex-direction: column;">
       <p class="text-center">User Address : {{this.$root.$data.currentAccount}}</p>
-      <!-- Upload Interface -->
-      <newPost></newPost>
+      
       <!-- Posts Interface --> 
 
       <!--Hashmodal-->
@@ -14,7 +13,7 @@
           </b-modal>
       <!--IMG Hashmodal-->
           <b-modal id="img-link-modal" title="Image URL">
-                      <p><b>https://ipfs.infura.io/ipfs/</b>{{selectedUser.iHash}}</p>
+                      <p>https://ipfs.infura.io/ipfs/{{selectedUser.iHash}}</p>
           </b-modal>
       <!-- Posts -->
       <ul class="home-list" align-h="center">

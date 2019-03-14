@@ -7,7 +7,7 @@
     <!-- Upload Component -->
     <newPost></newPost>
     <!-- Feed Component --> 
-    <feed></feed>
+    <feed :key="renderUpdate"></feed>
       
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   // data variables
   data() {
     return {
-      
+      renderUpdate: 0,
     };
   },
   

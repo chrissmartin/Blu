@@ -3,10 +3,10 @@
   <!-- Upload Interface -->   
 
   <div id="newPost">
-  <b-button v-b-modal.upload-modal class="up-btn" v-on:click="show = true"><p class="plus">+</p></b-button>
-  <b-modal id="upload-modal" title="New Post">
+  <b-button v-b-modal.upload-modal class="up-btn"><p class="plus">+</p></b-button>
+  <b-modal ref="upload_modal1" hide-footer centered id="upload-modal" title="New Post">
   <transition name="fade">     
-  <div id="upload" v-if="show">
+  <div id="upload">
     <div v-if="this.$root.$data.loading === false">
       <!-- Form for file choose, caption text and submission -->
       <form
@@ -41,7 +41,7 @@
     >
       <img
         class="upload-load"
-        src="https://media.giphy.com/media/2A6xoqXc9qML9gzBUE/giphy.gif"
+        src="../assets/giphy.gif"
       >
     </div>
   </div>
@@ -61,23 +61,18 @@ export default {
       show: false,
       buffer: '',
       caption: '',
-      componentKey: 0,
+      transactionHash: '',
     };
   },
-  created:function(){
-
-    console.log("Hi");
-    
-  },
-
   methods: {
-
+    hideModal() {
+      console.log("close1");
+        this.$refs.upload_modal1.hide();
+        console.log("close");
+      },
     /* used to catch chosen image &
      * convert it to ArrayBuffer.
      */
-    forceRerender() {
-          this.componentKey += 1;  
-        },
     captureFile(file) {
       const reader = new FileReader();
       if (typeof file !== 'undefined') {
@@ -104,20 +99,20 @@ export default {
       let imgHash;
       ipfs.add(this.buffer)
         .then((hashedImg) => {
-
           imgHash = hashedImg[0].hash;  
           return this.convertToBuffer(this.caption);
         }).then(bufferDesc => ipfs.add(bufferDesc)
           .then(hashedText => hashedText[0].hash)).then((textHash) => {
-
           this.$root.contract.methods
             .sendHash(imgHash, textHash)
-            .send({ from: this.$root.currentAccount },
-              (error, transactionHash) => {
-                
-                if (typeof transactionHash !== 'undefined') {
-                  forceRerender();
-                } else this.$root.loading = false;
+            .send({ from: this.$root.currentAccount },(error, transactionHash) => {
+                  console.log("ERROR: "+error);
+                  console.log("THASH: "+transactionHash);
+                  if(error == null){
+                    console.log("Hi");
+                    this.$root.$data.loading = false;
+                    hideModal();
+                  }
               });
         });
     },

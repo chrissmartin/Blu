@@ -4,44 +4,27 @@
     <h1 class="logo-b">B</h1><h1 class="logo-lu">lu.</h1>
     <div class="sidenav">
     </div>
-    <!-- Upload Component -->
-    <newPost></newPost>
-    <!-- Feed Component --> 
-    <feed :key="renderUpdate"></feed>
-      
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import newPost from './components/newPost.vue';
-import feed from './components/feed.vue';
+import Home from './views/Home.vue';
 
 export default {
   components: {
-    newPost,
-    feed
+    Home
   },
   name: 'App',
-  // data variables
-  data() {
-    return {
-      renderUpdate: 0,
-    };
-  },
-  
-  created:function(){
-
-    console.log("Hi");
-    
-  },
-
-  methods: {
-    
-  },
 }; 
 </script>
 
 <style>
+#navprofile{
+  z-index: 2;
+  position: relative;
+  left: 500px;
+}
 .logo-b{
   position: fixed;
   z-index: 2;

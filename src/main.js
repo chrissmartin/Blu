@@ -11,8 +11,11 @@ import
 import App from './App.vue';
 import web3 from './contracts/web3';
 import contract from './contracts/contractInstance';
+import VueRouter from 'vue-router';
+import { routes } from './routes';
 
 
+Vue.use(VueRouter);
 /**
  * injects bootstrap libraries
  * in Vue instance.
@@ -26,9 +29,16 @@ Vue.use(Layout);
 Vue.use(Button);
 Vue.use(Modal);
 
+//Router Initialized
+const router = new VueRouter({
+  routes,
+  mode: 'history',
+});
+
 // Vue instance
 new Vue({
   el: '#app',
+  router,
   data: {
     currentPosts: [],
     currentAccount: '',

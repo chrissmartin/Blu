@@ -20,6 +20,8 @@ git clone https://github.com/chrissmartin/Blu.git
 cd Blu
 npm install
 ```
+The smart contract has to be manually migrated to your network.
+The new contract address should be updated in src/contracts/contractInstance.js
 
 Serve the application with hot reload in a development environment via:
 
@@ -36,7 +38,7 @@ npm run dev
 
 ## Project Developers
 * Chriss Martin - Blockchain and Web Developer 
-* Amit Joseph   - Web Developer
+* Amit Joseph   - Blockchain and Web Developer 
 * Alen George   - Web Developer
 * Abin Mathew   - UX/UI Design
 ## Based on

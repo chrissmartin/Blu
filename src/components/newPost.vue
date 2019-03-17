@@ -110,8 +110,8 @@ export default {
                   console.log("THASH: "+transactionHash);
                   if(error == null){
                     console.log("Hi");
-                    this.$root.$data.loading = false;
-                    hideModal();
+                    this.$root.$data.loading = false; //Stop the loading animation
+                    this.$refs.upload_modal1.hide(); //Hide the Model
                   }
               });
         });

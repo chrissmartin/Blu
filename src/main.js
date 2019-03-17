@@ -13,7 +13,7 @@ import web3 from './contracts/web3';
 import contract from './contracts/contractInstance';
 import VueRouter from 'vue-router';
 import { routes } from './routes';
-
+import firebase from 'firebase';
 
 Vue.use(VueRouter);
 /**
@@ -29,14 +29,41 @@ Vue.use(Layout);
 Vue.use(Button);
 Vue.use(Modal);
 
+
+
+let app = '';
+const config = {
+  apiKey: "AIzaSyBD_HAKD-YwbSOgXQ_xqWOGMOaM8QuTTNQ",
+  authDomain: "blu-dapp.firebaseapp.com",
+  databaseURL: "https://blu-dapp.firebaseio.com",
+  projectId: "blu-dapp",
+  storageBucket: "blu-dapp.appspot.com",
+  messagingSenderId: "1068703469753"
+};
+
+//Firebase Init
+firebase.initializeApp(config);
+
 //Router Initialized
 const router = new VueRouter({
   routes,
   mode: 'history',
 });
 
-// Vue instance
-new Vue({
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) next('login');
+  else if (!requiresAuth && currentUser) next('home');
+  else next();
+});
+
+// Vue instance and Session
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) { 
+  
+  app =  new Vue({
   el: '#app',
   router,
   data: {
@@ -120,3 +147,4 @@ new Vue({
   },
   render: h => h(App),
 });
+}});

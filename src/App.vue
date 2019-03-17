@@ -1,4 +1,3 @@
-
 <template>
   <div id="app">
     <h1 class="logo-b">B</h1><h1 class="logo-lu">lu.</h1>
@@ -6,18 +5,10 @@
     </div>
     <router-view></router-view>
   </div>
+  
 </template>
 
-<script>
-import Home from './views/Home.vue';
 
-export default {
-  components: {
-    Home
-  },
-  name: 'App',
-}; 
-</script>
 
 <style>
 #navprofile{

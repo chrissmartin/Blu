@@ -10,6 +10,8 @@ A simple Ethereum-based Instagram-like decentralized application (dapp) where yo
 
 * **Node** - v10.x.x (preferrably v10.15.0 for long term support)
 * **npm** - v6.x.x (preferrably v6.6.0)
+* **Ganache** - Configured for Ganache local network (Port:7545)
+* **Metamask Extension** - Acts as ETH wallet provider. (Temporary Solution, we are trying integrate into the dApp)
 
 ## Running It Locally
 

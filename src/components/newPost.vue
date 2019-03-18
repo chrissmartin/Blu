@@ -112,6 +112,12 @@ export default {
                     console.log("Hi");
                     this.$root.$data.loading = false; //Stop the loading animation
                     this.$refs.upload_modal1.hide(); //Hide the Model
+                    this.$root.getPosts().then(() => { //Gets the new posts
+                      console.log("Done feching new post");
+                      //this.$refs.forceRerender();
+                      //this.$forceUpdate();
+                    }); 
+                    
                   }
               });
         });

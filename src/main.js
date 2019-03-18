@@ -15,6 +15,8 @@ import VueRouter from 'vue-router';
 import { routes } from './routes';
 import firebase from 'firebase';
 
+//Vue.forceUpdate(); //global declaration 
+
 Vue.use(VueRouter);
 /**
  * injects bootstrap libraries
@@ -105,7 +107,7 @@ firebase.auth().onAuthStateChanged(() => {
      * text & image using the IPFS gateway URL.
      */
     async getPosts() {
-      this.loading = false;
+      //this.loading = false;
       const posts = [];
       const counter = await contract.methods.getCounter().call({
         from: this.currentAccount,

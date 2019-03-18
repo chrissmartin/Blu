@@ -1,10 +1,10 @@
 <template>
   <div class="sign-up">
+    <h1 class="logo">Blu.</h1>
     <p>Let's create a new account !</p>
     <input type="text" v-model="email" placeholder="Email"><br>
     <input type="password" v-model="password" placeholder="Password"><br>
     <button @click="signUp">Sign Up</button>
-    <span>or go back to <router-link to="/login">login</router-link>.</span>
   </div>
 </template>
 
@@ -35,19 +35,35 @@
 </script>
 
  <style scoped>
-  .sign-up {
-    margin-top: 5%;
-    margin-left: 400px;
+   .logo{
+    color: #52A2DC;
+    font-family: 'Century Gothic';
+    font-size: 120px;
+    font-weight: 700;
+    text-shadow: 0 1px 4px #939393;
+    margin-bottom: 50px;
   }
-  input {
+  input{
     margin: 10px 0;
-    width: 40%;
     padding: 15px;
+    color: #212529;
+    box-shadow: 0px 15px 32px #7EE5F5;
+    border: none;
   }
   button {
-    margin-top: 10px;
-    width: 20%;
-    cursor: pointer;
+    width: 120px;
+    position: relative;
+    display: block;
+    margin: 50px auto;
+    padding: 5px 30px;
+    overflow: hidden;
+    border-width: 0;
+    outline: none;
+    border-radius: 7px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: #ffffff;
+    color: #333333;
+    transition: background-color .3s;
   }
   span {
     display: block;

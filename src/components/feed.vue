@@ -52,6 +52,7 @@ export default {
   // data variables
   data() {
     return {
+      item: '',
       selectedUser: '',
     };
   },

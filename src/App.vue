@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <h1 class="logo-b">B</h1><h1 class="logo-lu">lu.</h1>
-    <div class="sidenav">
-    </div>
+    <div id="screenMask"></div>
     <router-view></router-view>
   </div>
   
@@ -11,40 +9,24 @@
 
 
 <style>
-#navprofile{
-  z-index: 2;
-  position: relative;
-  left: 500px;
+body {
+    position: relative;
+    margin: 0;
 }
-.logo-b{
-  position: fixed;
-  z-index: 2;
-  top: 1px;
-  left: 45px;
-  color: #ffffff;
-  font-size: 90px;
+
+#screenMask {
+    position: absolute;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    z-index: 1000;
+    background-color: #000;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    visibility: hidden;
 }
-.logo-lu{
-  position: fixed;
-  z-index: 2;
-  top: 10px;
-  left: 100px;
-  color: #00ABE7;
-  font-size: 80px;
-}
-.sidenav {
-  height: 100%;
-  width: 100px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #00ABE7;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
+
 #app {
-  
+  height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   

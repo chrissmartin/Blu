@@ -109,13 +109,15 @@ export default {
                   console.log("ERROR: "+error);
                   console.log("THASH: "+transactionHash);
                   if(error == null){
-                    console.log("Hi");
-                    this.$root.$data.loading = false; //Stop the loading animation
-                    this.$refs.upload_modal1.hide(); //Hide the Model
-                    this.$root.getPosts().then(() => { //Gets the new posts
+
+                    this.$root.getPosts().then(() => { //wait for the new posts
+
                       console.log("Done feching new post");
-                      //this.$refs.forceRerender();
-                      //this.$forceUpdate();
+
+                      this.$root.$data.loading = false; //Stop the loading animation
+                      this.$refs.upload_modal1.hide(); //Hide the Model
+
+                      this.$router.go(0); //refresh page || TODO -> update only component 
                     }); 
                     
                   }

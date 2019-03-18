@@ -1,0 +1,16 @@
+Discard all local changes, but save them for possible re-use later. 
+>git stash
+
+Discarding local changes (permanently) to a file. 
+>git checkout -- <file>
+
+Discard all local changes to all files permanently. 
+>git reset --hard
+
+----------------------------------------------------------------------------
+
+When a file is marked as skip-worktree, git will read it as if it were up to date. 
+>git update-index --skip-worktree <file_name>
+
+to revert
+>git update-index --no-skip-worktree <file_name>

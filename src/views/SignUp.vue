@@ -45,9 +45,11 @@
   }
   input{
     margin: 10px 0;
+    border-radius: 2px;
     padding: 15px;
+    width: 25vw;
     color: #212529;
-    box-shadow: 0px 15px 32px #7EE5F5;
+    box-shadow: 1px 4px 12px 0px #7ee5f57d;
     border: none;
   }
   button {

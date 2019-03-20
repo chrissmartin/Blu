@@ -1,31 +1,35 @@
 <template>
   <div class="login" align-v="center">
     <b-container>
-      <b-row align-h="center" align-v="center">
+      <b-row>
         <b-col class="register left d-flex justify-content-center align-middle">
-          <signup v-if="supmode" v-on:after-leave="afterLeave"></signup>
+          <signup v-if="supmode" v-on:after-leave="afterLeave" id="form-text"></signup>
           <transition name="slide-fade">
-          <div v-if="!supmode" >
-            <h1>WELCOME BACK!</h1>
-            <h6>SIGN IN TO ENTER THE SAFEST SOCIAL MEDIA IN THE WORLD</h6>
-            <h4>NEW HERE?</h4>
-            <button @click="supmode=!supmode">Sign Up</button>
+          <div v-if="!supmode" id="blugrad">
+            <div id="welcome-text">
+              <h1>WELCOME BACK!</h1>
+              <h6>SIGN IN TO ENTER THE SAFEST SOCIAL MEDIA IN THE WORLD</h6>
+              <h4>NEW HERE?</h4>
+              <button @click="supmode=!supmode">Sign Up</button>
+            </div>
           </div> 
           </transition>
         </b-col>
         <b-col class="signin right d-flex justify-content-center align-middle">
-          <div v-if="!supmode">
+          <div v-if="!supmode" id="form-text">
             <h1 class="logo">Blu.</h1>
             <input type="text" v-model="email" placeholder="Email"><br>
             <input type="password" v-model="password" placeholder="Password"><br>
             <button @click="login">Login</button>  
           </div>
           <transition name="slide-fade">
-            <div v-if="supmode">
-              <h1>WELCOME BACK!</h1>
-              <h6>SIGN UP TO ENTER THE SAFEST SOCIAL MEDIA IN THE WORLD</h6>
-              <h4>ALREADY A USER?</h4>
-              <button @click="supmode=!supmode">Sign In</button>
+            <div v-if="supmode" id="blugrad">
+              <div id="welcome-text">
+                <h1>WELCOME BACK!</h1>
+                <h6>SIGN UP TO ENTER THE SAFEST SOCIAL MEDIA IN THE WORLD</h6>
+                <h4>ALREADY A USER?</h4>
+                <button @click="supmode=!supmode">Sign In</button>
+              </div>
             </div>
           </transition>  
         </b-col>
@@ -71,7 +75,23 @@
 </script>
 
 <style scoped>  /* "scoped" attribute limit the CSS to this component only */
-  
+  body{
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    width: 100vw;
+  }
+  #welcome-text{
+    padding: 0px;
+    position: relative;
+    top: 30%;
+    
+  }
+  #form-text{
+    position: relative;
+    padding: 0px;
+    
+  }
   .logo{
     color: #52A2DC;
     font-family: 'Century Gothic';
@@ -81,14 +101,25 @@
     margin-bottom: 50px;
   }
   .login {
-    margin-top:5%;
     font-family: 'Century Gothic', 'Arial Narrow', Arial, sans-serif;
     
   }
+  .container{
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    padding: 0px;
+    max-width: 100%;
+  }
   .left{
     text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
     background-color: #ffffff;
-    height: 100%;
+    height: 100vh;
+    width: 50vw;
+    padding: 0px;
     color: #333333;
 
 }
@@ -98,7 +129,9 @@
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    height: 100%;
+    height: 100vh;
+    width: 50vw;
+    padding: 0px;
     color: #333333;
 }
 @media (max-width: 1200px) { 
@@ -111,16 +144,19 @@
 }
 
 #blugrad {
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   background-color: #75BDF2; /* For browsers that do not support gradients */
   background-image: linear-gradient(to bottom, #7EE5F5, #75BDF2); /* Standard syntax (must be last) */
 }
 
 input {
     margin: 10px 0;
+    border-radius: 2px;
     padding: 15px;
+    width: 25vw;
     color: #212529;
-    box-shadow: 0px 15px 32px #7EE5F5;
+    box-shadow: 1px 4px 12px 0px #7ee5f57d;
     border: none;
   }
   button {
@@ -159,7 +195,7 @@ input {
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(500px);
+  transform: translateX(10px);
   opacity: 0;
 }
 

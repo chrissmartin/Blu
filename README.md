@@ -1,5 +1,5 @@
 # Blu. - Social Network dApp
-
+![Ver](https://img.shields.io/badge/Version-1.0-brightgreen.svg)
 A simple Ethereum-based Instagram-like decentralized application (dapp) where you can post images, text, and view it. This dApp also shows all the behind the scenes working of IPFS and Ethereum blockchain.
 
 ---

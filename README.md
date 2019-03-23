@@ -46,9 +46,10 @@ npm run dev
 * Chriss Martin - Blockchain and Web Developer 
 * Amit Joseph   - Blockchain and Web Developer 
 * Alen George   - Web Developer
-* Abin Mathew   - UX/UI Design
-<br />
+* Abin Mathew   - UX/UI Design <br />
+
 ![ForTheBadge built-with-swag](http://ForTheBadge.com/images/badges/built-with-swag.svg)
+
 ## Based on
 
 * Openberry [Instagram-dApp](https://github.com/openberry-ac/instagram)

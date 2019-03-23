@@ -1,5 +1,7 @@
 # Blu. - Social Network dApp 
-![Ver](https://img.shields.io/badge/Version-1.0-brightgreen.svg)![Vue](https://img.shields.io/badge/Made%20with-Vue.js-1abc9c.svg)[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+![Ver](https://img.shields.io/badge/Version-1.0-brightgreen.svg)
+![Vue](https://img.shields.io/badge/Made%20with-Vue.js-1abc9c.svg)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
 ---
 A simple Ethereum-based Instagram-like decentralized application (dapp) where you can post images, text, and view it. This dApp also shows all the behind the scenes working of IPFS and Ethereum blockchain.
@@ -45,7 +47,8 @@ npm run dev
 * Amit Joseph   - Blockchain and Web Developer 
 * Alen George   - Web Developer
 * Abin Mathew   - UX/UI Design
-[![ForTheBadge built-with-swag](http://ForTheBadge.com/images/badges/built-with-swag.svg)]
+<br />
+![ForTheBadge built-with-swag](http://ForTheBadge.com/images/badges/built-with-swag.svg)
 ## Based on
 
 * Openberry [Instagram-dApp](https://github.com/openberry-ac/instagram)

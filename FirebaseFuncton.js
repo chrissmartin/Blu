@@ -34,7 +34,8 @@ exports.addUserToDb = functions.auth.user().onCreate((user) => {
         userId : null,
         walletId : null,
         followers:0,
-        profilePhoto:null,
+        profilePhotoHash:null,
+        verified: false,
         timestamp: FieldValue.serverTimestamp()
     }); //returns promise | TODO : handle the promise
 

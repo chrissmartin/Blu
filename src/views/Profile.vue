@@ -27,22 +27,6 @@ export default {
   name: 'profile',
 }; 
 
-var user = firebase.auth().currentUser;
-var name, email, imgUrl, userId, verified,walletId,followers;
-
-if (user != null) {
-  name = user.displayName;
-  email = user.email;
-  imgUrl = "https://ipfs.io/ipfs/"+user.profilePhotoHash;
-  verified = user.verified;
-  walletId = user.walletId;
-  followers = user.followers;
-
-  uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                   // this value to authenticate with your backend server, if
-                   // you have one. Use User.getToken() instead.
-}
-
 </script>
 
 <style>

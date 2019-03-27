@@ -1,4 +1,4 @@
-
+import * as firebase from 'firebase';
 
 const state = {
     user: null,
@@ -7,7 +7,15 @@ const state = {
 },
 
 const getters = {
-
+    user (state) {
+        return state.user
+      },
+    loading (state) {
+        return state.loading
+      },
+    error (state) {
+        return state.error
+      }
 },
 
 const actions = {
@@ -42,8 +50,7 @@ const actions = {
             user => {
               commit('setLoading', false)
               const newUser = {
-                id: user.uid,
-                registeredMeetups: []
+                id: user.uid
               }
               commit('setUser', newUser)
             }
@@ -59,9 +66,8 @@ const actions = {
       clearError ({commit}) {
         commit('clearError')
       }
-    },
-
 },
+
 const mutations= {
     setUser (state,payload){
         state.user = payload

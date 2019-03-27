@@ -18,9 +18,21 @@
         <b-col class="signin right d-flex justify-content-center align-middle">
           <div v-if="!supmode" id="form-text">
             <h1 class="logo">Blu.</h1>
-            <input type="text" v-model="email" placeholder="Email"><br>
-            <input type="password" v-model="password" placeholder="Password"><br>
-            <button @click="login">Login</button>  
+            <b-form>
+            <b-form-input
+                      id="auth-input"
+                      type="email"
+                      v-model="form.email"
+                      required
+                      placeholder="Enter email" />
+            <b-form-input
+                      id="auth-input"
+                      type="password"
+                      v-model="form.password"
+                      required
+                      placeholder="Enter password" />
+            <button @click="onSignin">Login</button>  
+            </b-form>
           </div>
           <transition name="slide-fade">
             <div v-if="supmode" id="blugrad">
@@ -55,21 +67,38 @@
         supmode: false
       }
     },
+    computed: {
+      user () {
+        return this.$store.getters.user
+      },
+      error () {
+        return this.$store.getters.error
+      },
+      loading () {
+        return this.$store.getters.loading
+      }
+    },
+    watch: {
+      user (value) {
+        if (value !== null && value !== undefined) {
+          this.$router.push('/')
+        }
+      }
+    },
     methods: {
       afterLeave: function (el) {
         supmode=!supmode;
       },
-      login: function() {
-        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-          (user) => {
-            this.$router.replace('home')
-          },
-          (err) => {
-            alert('Oops. ' + err.message)
-          }
-        );
+      onSignin () {
+        this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
+      },
+      onDismissed () {
+        this.$store.dispatch('clearError')
       }
+
     }
+
+
   }
   
 </script>

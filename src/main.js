@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import store from './store/index';
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -53,7 +54,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser;
+  const currentUser = firebase.auth().user;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
   if (requiresAuth && !currentUser) next('login');
@@ -68,6 +69,7 @@ firebase.auth().onAuthStateChanged(() => {
   app =  new Vue({
   el: '#app',
   router,
+  store,
   data: {
     currentPosts: [],
     currentAccount: '',

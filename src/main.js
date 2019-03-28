@@ -31,7 +31,7 @@ Vue.use(Layout);
 Vue.use(Button);
 Vue.use(Modal);
 
-//LOL
+//LOL LOL
 
 let app = '';
 const config = {

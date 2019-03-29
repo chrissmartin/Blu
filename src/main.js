@@ -15,6 +15,8 @@ import VueRouter from 'vue-router';
 import { routes } from './routes';
 import firebase from 'firebase';
 
+import Store from '../store'
+
 //Vue.forceUpdate(); //global declaration 
 
 Vue.use(VueRouter);
@@ -67,6 +69,7 @@ firebase.auth().onAuthStateChanged(() => {
   
   app =  new Vue({
   el: '#app',
+  Store,
   router,
   data: {
     currentPosts: [],

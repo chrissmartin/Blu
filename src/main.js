@@ -15,11 +15,12 @@ import VueRouter from 'vue-router';
 import { routes } from './routes';
 import firebase from 'firebase';
 
-import Store from '../store'
+import {store} from './store'
 
 //Vue.forceUpdate(); //global declaration 
 
 Vue.use(VueRouter);
+
 /**
  * injects bootstrap libraries
  * in Vue instance.
@@ -69,7 +70,7 @@ firebase.auth().onAuthStateChanged(() => {
   
   app =  new Vue({
   el: '#app',
-  Store,
+  store,
   router,
   data: {
     currentPosts: [],

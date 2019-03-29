@@ -6,7 +6,7 @@ Vue.use(Vuex);
 // root state object.
 // each Vuex instance is just a single state tree.
 const state = {
-    user : null
+    user:"LOL"
   }
   
   // mutations are operations that actually mutates the state.
@@ -28,12 +28,14 @@ const state = {
   
   // getters are functions
   const getters = {
-    getUser: state => state.user
+    getUser: state => {return state.user}
   }
   
   // A Vuex instance is created by combining the state, mutations, actions,
   // and getters.
-  export default new Vuex.Store({
+ // export default new
+  //export const store = 
+  export const store = new Vuex.Store({
     state,
     getters,
     actions,

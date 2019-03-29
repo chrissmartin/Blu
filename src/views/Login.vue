@@ -43,6 +43,8 @@
   import firebase from 'firebase';
   import signup from './SignUp.vue';
 
+  import { mapGetters, mapActions } from 'vuex'
+
   export default {
     name: 'login',
     components:{
@@ -56,14 +58,17 @@
       }
     },
     methods: {
+      //mapActions(['updateUser']),
+
       afterLeave: function (el) {
         supmode=!supmode;
       },
       login: function() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           (user) => {
-            this.$store.dispatch('updateUser', user);
+            console.log(this.$store.getters.getUser);
             this.$router.replace('home');
+            //console.log(guser());
           },
           (err) => {
             alert('Oops. ' + err.message)

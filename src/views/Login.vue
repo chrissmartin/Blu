@@ -66,7 +66,12 @@
       login: function() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           (user) => {
-            console.log(this.$store.getters.getUser);
+            user = firebase.auth().currentUser;
+            console.log("EMAIL: "+user.email);
+            //console.log("GETTER",this.$store.getters.getUser);
+
+            this.$store.dispatch('updateUser', user);
+            console.log("UPDATED",this.$store.getters.getUser.email);
             this.$router.replace('home');
             //console.log(guser());
           },

@@ -26,7 +26,10 @@ export const routes= [
   {
     path: '/profile',
     name: 'profile',
-    component: profile
+    component: profile,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/home',

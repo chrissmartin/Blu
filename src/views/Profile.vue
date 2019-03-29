@@ -9,7 +9,7 @@
         </div>
         <b-card-text class="mx-auto profile-info">
           <p>User Address : {{this.$root.$data.currentAccount}}</p>
-          <p>Bio</p>
+          <p>Email: {{email1}}</p>
           <p>Username : </p>
           <p>No of posts: </p>
           <p>Following: </p>
@@ -25,6 +25,19 @@
 
 export default { 
   name: 'profile',
+  data(){
+    return{
+    email : "LOL"
+    }
+  },
+   computed: {
+    // a computed getter
+    email1: function () {
+      // `this` points to the vm instance
+      console.log(this.$store.getters.getUser.email);
+      return this.$store.getters.getUser.email
+    }
+   },
 }; 
 
 </script>

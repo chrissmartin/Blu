@@ -1,7 +1,9 @@
 
 <template>
     <div id="feed" style="display: flex; flex-direction: column;">
-      <p class="text-center">User Address : {{this.$root.$data.currentAccount}}</p>
+      <router-link tag="profile" to="/profile">
+      <a class="text-center">User Address : {{this.$root.$data.currentAccount}}</a>
+      </router-link>
       
       <!-- Posts Interface --> 
 

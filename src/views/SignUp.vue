@@ -10,6 +10,8 @@
 
  <script>
   import firebase from 'firebase';
+  /* require("firebase/firestore"); */
+  
 
   export default {
     name: 'signUp',
@@ -23,6 +25,8 @@
       signUp: function() {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
           (user) => {
+            /* user = firebase.auth().currentUser;
+            firebase.collection("users").doc(user.uid).update({walletId: this.$root.$data.currentAccount}); */
             this.$router.replace('home')
           },
           (err) => {

@@ -2,7 +2,9 @@
 <template>
     <div id="feed" style="display: flex; flex-direction: column;">
       <router-link tag="profile" to="/profile">
+      <center>
       <a class="text-center">User Address : {{this.$root.$data.currentAccount}}</a>
+      </center>
       </router-link>
       
       <!-- Posts Interface --> 

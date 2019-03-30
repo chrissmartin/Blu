@@ -5,11 +5,14 @@
      <div class="profile-card">
       <b-card>
         <div class="image-cropper">
-        <b-card-img src="https://placekitten.com/480/210" alt="Profile image" img-left class="mx-auto"/>
+        <!-- <b-card-img src="https://placekitten.com/480/210" alt="Profile image" img-left class="mx-auto"/> -->
         </div>
+        <router-link tag="profile" to="/home">
+      <a>BACK</a>
+      </router-link>
         <b-card-text class="mx-auto profile-info">
           <p>User Address : {{this.$root.$data.currentAccount}}</p>
-          <p>Email: {{email1}}</p>
+          <p>Email: {{email}}</p>
           <p>Username : </p>
           <p>No of posts: </p>
           <p>Following: </p>
@@ -27,11 +30,11 @@ export default {
   name: 'profile',
   data(){
     return{
-    email : "LOL"
+    email : this.$store.getters.getUser.email
     }
   },
    computed: {
-    // a computed getter
+    // a computed getter NOT USED
     email1: function () {
       // `this` points to the vm instance
       console.log(this.$store.getters.getUser.email);

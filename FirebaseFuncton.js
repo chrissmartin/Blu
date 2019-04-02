@@ -33,7 +33,7 @@ exports.addUserToDb = functions.auth.user().onCreate((user) => {
         name : displayName,
         userId : null,
         walletId : null,
-        followers:0,
+        followers: 0,
         profilePhotoHash:null,
         verified: false,
         timestamp: FieldValue.serverTimestamp()

@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <div id="screenMask"></div>
-    <router-view></router-view>
+    <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+    <!--<div id="screenMask"></div>-->
+    <router-view />
   </div>
   
 </template>

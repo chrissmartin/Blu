@@ -1,22 +1,22 @@
 
 <template>
     <div id="feed" style="display: flex; flex-direction: column;">
-      <router-link tag="profile" to="/profile">
+      <router-link to="profile">
       <center>
-      <a class="text-center">User Address : {{this.$root.$data.currentAccount}}</a>
+      <p class="text-center">User Address : {{this.$root.$data.currentAccount}}</p>
       </center>
       </router-link>
       
       <!-- Posts Interface --> 
 
       <!--Hashmodal-->
-          <b-modal id="hash-modal" title="Hashes">
+          <b-modal id="hash-modal" title="Hashes" ok-only no-stacking>
                       <p><b> Caption Hash: </b>{{ selectedUser.tHash }}</p>
                       <p><b>Image Hash: </b> {{ selectedUser.iHash }}</p>
                       <p><b>Owner Address: </b>{{ selectedUser.ownHash }}</p>
           </b-modal>
       <!--IMG Hashmodal-->
-          <b-modal id="img-link-modal" title="Image URL">
+          <b-modal id="img-link-modal" title="Image URL" ok-only no-stacking>
                       <p>https://ipfs.infura.io/ipfs/{{selectedUser.iHash}}</p>
           </b-modal>
       <!-- Posts -->
@@ -49,9 +49,9 @@
 </template>
 
 <script>
+import profile from '../views/Profile.vue';
 
 export default {
-  
   name: 'feed',
   // data variables
   data() {
@@ -60,7 +60,9 @@ export default {
       selectedUser: '',
     };
   },
-
+  components:{
+    profile
+  },
   methods: {
 
     sendInfo(item) {
@@ -110,7 +112,7 @@ export default {
   left: 440px;
   color: #000000;
 }
-#img-link-modal{
-  max-width: max-content;
+.modal-body{
+  word-wrap: break-word;
 }
 </style>

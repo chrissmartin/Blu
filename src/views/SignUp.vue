@@ -4,6 +4,7 @@
     <p>Let's create a new account !</p>
     <input type="text" v-model="email" placeholder="Email"><br>
     <input type="password" v-model="password" placeholder="Password"><br>
+    <input type="text" v-model="username" placeholder="username"><br>
     <button @click="signUp">Sign Up</button>
   </div>
 </template>
@@ -18,16 +19,19 @@
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
+        username: '',
       }
     },
     methods: {
       signUp: function() {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
           (user) => {
-            /* user = firebase.auth().currentUser;
-            firebase.collection("users").doc(user.uid).update({walletId: this.$root.$data.currentAccount}); */
-            this.$router.replace('home')
+
+            user = firebase.auth().currentUser;
+            //firebase.collection("users").doc(user.uid).update({walletId: this.$root.$data.currentAccount});
+            firebase.collection("users").doc(user.uid).update("Hi");
+            this.$router.push('home')
           },
           (err) => {
             alert('Oops. ' + err.message)
@@ -57,19 +61,19 @@
     border: none;
   }
   button {
-    width: 120px;
     position: relative;
     display: block;
-    margin: 50px auto;
+    margin: 20px auto;
     padding: 5px 30px;
     overflow: hidden;
     border-width: 0;
     outline: none;
     border-radius: 7px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    height: 40px;
+    box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.42);
     background-color: #ffffff;
-    color: #333333;
-    transition: background-color .3s;
+    color: #000000a3;
+    transition: background-color 0.3s;
   }
   span {
     display: block;

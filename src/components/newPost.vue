@@ -53,6 +53,7 @@
 <script>
 
 import ipfs from '../contracts/ipfs';
+
 export default {
   name: 'newPost',
   // data variables

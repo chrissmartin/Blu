@@ -77,12 +77,9 @@ firebase.auth().onAuthStateChanged(() => {
 			data: {
 				currentPosts: [],
 				currentAccount: "",
-				
+				loading: true,
+				contract
 			},
-
-			components: {
-				PulseLoader
-			  },
 			/**
 			 * calls functions for getting
 			 * account & current posts.

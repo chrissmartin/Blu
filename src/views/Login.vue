@@ -60,7 +60,7 @@ export default {
 		return {
 			email: "",
 			password: "",
-			supmode: false
+			supmode: false,
 		};
 	},
 	methods: {

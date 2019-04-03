@@ -1,12 +1,6 @@
 
 <template>
     <div id="feed" style="display: flex; flex-direction: column;">
-      <router-link to="profile">
-      <center>
-      <p class="text-center">User Address : {{this.$root.$data.currentAccount}}</p>
-      </center>
-      </router-link>
-      
       <!-- Posts Interface --> 
 
       <!--Hashmodal-->
@@ -60,9 +54,7 @@ export default {
       selectedUser: '',
     };
   },
-  components:{
-    profile
-  },
+
   methods: {
 
     sendInfo(item) {
@@ -78,10 +70,12 @@ export default {
   
   justify-content: center;
   color: #212529;
-  margin-top: 3%;
+  
 }
 
-
+.profile-icon{
+  float: right;
+}
 .card img {
   object-fit: cover;
   height: 375px;
@@ -96,9 +90,9 @@ export default {
 
 
 .home-list{
-  padding: 0;
+  padding: 0px;
   list-style: none;
-  margin: auto;
+  margin: 250px auto;
 }
 
 .home-card-text {

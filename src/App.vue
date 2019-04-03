@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
     <!--<div id="screenMask"></div>-->
     <router-view />
   </div>

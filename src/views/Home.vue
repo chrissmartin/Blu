@@ -1,5 +1,12 @@
 <template>
   <div class="home">
+    <img class="blu-nav" src="../assets/bg.png" alt="Blu">
+    <button @click="logout" class="logout float-left">Logout</button>
+    <router-link to="profile">
+      <div class="profile-icon">
+          <img src="../assets/user.png" alt="Profile" height="50px" width="50px">
+      </div>
+    </router-link>    
     <timeline></timeline>
   </div>
 </template>
@@ -7,22 +14,53 @@
 
 <script>
 import timeline from './Timeline.vue';
-
+import profile from './Profile.vue';
+import firebase from 'firebase';
 
 export default {
+  name: 'Home',
+
   components: {
     timeline,
+    profile
   },
-  name: 'Home',
+  
+  methods: {
+    logout: function() {
+      firebase.auth().signOut().then(() => {
+        this.$router.push('login')
+      })
+    }
+  },
 }
 
 </script>
 
 <style>
-.nav-link{
-  position: relative;
-  z-index: 2;
-  top: -10px;
-  right: 50px;
+.blu-nav{
+  position: absolute;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  top: -50px
 }
+.profile-icon{
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+.logout{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 5px 30px;
+    overflow: hidden;
+    border-width: 0;
+    outline: none;
+    border-radius: 7px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: #ffffff;
+    color: #333333;
+    transition: background-color .3s;
+  }
 </style>

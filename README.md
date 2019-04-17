@@ -18,7 +18,7 @@ A simple Ethereum-based Instagram-like decentralized application (dapp) where yo
 * **Metamask Extension** - Acts as ETH wallet provider. (Temporary Solution, we are trying integrate into the dApp)
 
 ## Demo Video
-![Demo Video](https://www.youtube.com/watch?v=Rn1WdEvAJCY)
+[Demo Video](https://www.youtube.com/watch?v=Rn1WdEvAJCY)
 ## Running It Locally
 
 Clone this repo via to your local machine and install the dependencies by doing the following:

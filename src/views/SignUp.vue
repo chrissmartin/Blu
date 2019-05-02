@@ -27,10 +27,20 @@
       signUp: function() {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
           (user) => {
-
+            //To enter extra profile details to Firestore.
+            const db=firebase.firestore();
             user = firebase.auth().currentUser;
-            //firebase.collection("users").doc(user.uid).update({walletId: this.$root.$data.currentAccount});
-            firebase.collection("users").doc(user.uid).update("Hi");
+            console.log(user.uid);
+            console.log(this.email);
+            db.collection("users").doc(user.uid).set({
+              email: this.email,
+              name : this.username,
+              userId : user.uid,
+              walletId : this.$root.$data.currentAccount,
+              followers: 0,
+              profilePhotoHash:null,
+              verified: false
+            });
             this.$router.push('home')
           },
           (err) => {

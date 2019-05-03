@@ -13,7 +13,7 @@ import newPost from '../components/newPost.vue';
 import feed from '../components/feed.vue';
 
 export default {
-  name: 'timeline',
+ // name: 'timeline',
   components: {
     newPost,
     feed

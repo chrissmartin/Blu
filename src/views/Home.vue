@@ -21,8 +21,8 @@ export default {
   name: 'Home',
 
   components: {
-    timeline,
-    profile
+    'timeline':timeline,
+    'profile':profile
   },
   
   methods: {

@@ -12,7 +12,7 @@
  <script>
   import firebase from 'firebase';
   /* require("firebase/firestore"); */
-  
+  //Test
 
   export default {
     name: 'signUp',
@@ -34,7 +34,7 @@
             console.log(this.email);
             db.collection("users").doc(user.uid).set({
               email: this.email,
-              name : this.username,
+              username : this.username,
               userId : user.uid,
               walletId : this.$root.$data.currentAccount,
               followers: 0,

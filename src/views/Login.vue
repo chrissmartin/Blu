@@ -47,9 +47,7 @@ import firebase from "firebase";
 import signup from "./SignUp.vue";
 //import { mapGetters, mapActions } from "vuex";
 
-require('vue2-animate/dist/vue2-animate.min.css');
-
-
+require('vue2-animate/dist/vue2-animate.min.css')
 
 export default {
 	name: "login",
@@ -71,13 +69,11 @@ export default {
 		},
 		login: function() {
 			firebase
-				.auth().signInWithEmailAndPassword(this.email, this.password)
-				.then(
+				.auth().signInWithEmailAndPassword(this.email, this.password).then(
 					user => {
 						user = firebase.auth().currentUser;
 						console.log("EMAIL: " + user.email);
 						//console.log("GETTER",this.$store.getters.getUser);
-
 						this.$store.dispatch("updateUser", user);
 						console.log("UPDATED", this.$store.getters.getUser.email);
 						this.$router.push("home");

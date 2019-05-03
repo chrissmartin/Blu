@@ -12,7 +12,7 @@
 				<b-card-text class="mx-auto profile-info">
 					<p>User Address : {{this.$root.$data.currentAccount}}</p>
 					<p>Email: {{email}}</p>
-					<p>Username :</p>
+					<p>Username : {{usern()}}<p>
 					<p>No of posts:</p>
 					<p>Following:</p>
 					<p>User image</p>
@@ -23,8 +23,10 @@
 </template>
 
 <script>
+ import firebase from 'firebase';
+
 export default {
-	name: "profile",
+	//name: "profile",
 	data() {
 		return {
 			email: this.$store.getters.getUser.email
@@ -36,6 +38,28 @@ export default {
 			// `this` points to the vm instance
 			console.log(this.$store.getters.getUser.email);
 			return this.$store.getters.getUser.email;
+		},
+		usern: function() {
+		const db=firebase.firestore();
+		var userId = firebase.auth().currentUser.uid;
+		var user = db.collection('users').doc(userId);
+		//console.log(user);
+		var getDoc = user.get()
+		.then(doc => {
+			if (!doc.exists) {
+			console.log('No such document!');
+			} else {
+			//username = user.username;
+			//console.log('Username:'+username)
+			console.log('Document data:', doc.data());
+			}
+		})
+		.catch(err => {
+			console.log('Error getting document', err);
+		});
+		
+		console.log({users});
+		console.log({userId});
 		}
 	}
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img class="blu-nav" src="../assets/bg.png" alt="Blu">
+    <img class="blu-nav" src="../assets/bg-crop.png" alt="Blu">
     <button @click="logout" class="logout float-left">Logout</button>
     <router-link to="profile">
       <div class="profile-icon">
@@ -40,10 +40,14 @@ export default {
 .blu-nav{
   position: absolute;
   width: 100%;
-  padding: 0px;
-  margin: 0px;
-  top: -50px
+  top: -40px
 }
+@media only screen and (max-width: 600px) {
+.blu-nav{
+  top: 0px
+}
+}
+
 .profile-icon{
     position: absolute;
     right: 10px;

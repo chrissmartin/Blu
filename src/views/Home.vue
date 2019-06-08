@@ -2,11 +2,10 @@
   <div class="home">
     <img class="blu-nav" src="../assets/bg-crop.png" alt="Blu">
     <button @click="logout" class="logout float-left">Logout</button>
-    <router-link to="profile">
-      <div class="profile-icon">
+      <div class="profile-icon" @click="goToProfile()">
           <img src="../assets/user.png" alt="Profile" height="50px" width="50px">
       </div>
-    </router-link>    
+  
     <timeline></timeline>
   </div>
 </template>
@@ -16,6 +15,11 @@
 import timeline from './Timeline.vue';
 import profile from './Profile.vue';
 import firebase from 'firebase';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+
+Vue.use(VueRouter);
+
 
 export default {
   name: 'Home',
@@ -26,6 +30,9 @@ export default {
   },
   
   methods: {
+    goToProfile:function() {
+          this.$router.push({name:'profile'})
+    },
     logout: function() {
       firebase.auth().signOut().then(() => {
         this.$router.push('login')

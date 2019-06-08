@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import profile from '../views/Profile.vue';
 
 export default {
   name: 'feed',

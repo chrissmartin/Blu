@@ -20,7 +20,6 @@ import { routes } from "./routes";
 import firebase from "firebase";
 
 import { store } from "./store";
-
 //Vue.forceUpdate(); //global declaration
 
 Vue.use(VueRouter);

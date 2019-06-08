@@ -1,71 +1,44 @@
 <template>
 	<div id="profile">
 		<!-- Profile info -->
-		<div class="profile-card">
-			<b-card>
+		
+			<b-card id="profile-card">
 				<div class="image-cropper">
-					<!-- <b-card-img src="https://placekitten.com/480/210" alt="Profile image" img-left class="mx-auto"/> -->
+					<b-card-img src="https://placekitten.com/480/210" alt="Profile image" img-left class="mx-auto"/>
 				</div>
-				<router-link to="home">
+				<router-link to="home" id="back-btn">
 					<a>BACK</a>
 				</router-link>
 				<b-card-text class="mx-auto profile-info">
-					<p>User Address : {{this.$root.$data.currentAccount}}</p>
-					<p>Email: {{email}}</p>
-					<p>Username : {{usern()}}<p>
-					<p>No of posts:</p>
-					<p>Following:</p>
+					<p>Wallet Address : {{this.$root.$data.currentAccount}}</p>
+					<p>Email: {{email}} </p>
+					<p>Username : {{username}} <p>
+					<p>Wallet: {{walletid}} </p>
+					<p>Followers: {{followers}} </p>
 					<p>User image</p>
 				</b-card-text>
 			</b-card>
-		</div>
+		
 	</div>
 </template>
 
 <script>
- import firebase from 'firebase';
-
+// import firebase from 'firebase';
+//console.log(this.$store.getters.getUser.email);
 export default {
-	//name: "profile",
+	name: "profile",
 	data() {
 		return {
-			email: this.$store.getters.getUser.email
+			username: this.$store.getters.getUser.username,
+			email: this.$store.getters.getUser.email,
+			followers: this.$store.getters.getUser.followers,
+			walletid: this.$store.getters.getUser.walletId
 		};
 	},
-	computed: {
-		// a computed getter NOT USED
-		email1: function() {
-			// `this` points to the vm instance
-			console.log(this.$store.getters.getUser.email);
-			return this.$store.getters.getUser.email;
-		},
-		usern: function() {
-		const db=firebase.firestore();
-		var userId = firebase.auth().currentUser.uid;
-		var user = db.collection('users').doc(userId);
-		//console.log(user);
-		var getDoc = user.get()
-		.then(doc => {
-			if (!doc.exists) {
-			console.log('No such document!');
-			} else {
-			//username = user.username;
-			//console.log('Username:'+username)
-			console.log('Document data:', doc.data());
-			}
-		})
-		.catch(err => {
-			console.log('Error getting document', err);
-		});
-		
-		console.log({users});
-		console.log({userId});
-		}
-	}
 };
 </script>
 
-<style>
+<style scoped>
 .profile-card {
 	z-index: 2;
 	position: relative;
@@ -75,7 +48,7 @@ export default {
 }
 
 .card {
-	box-shadow: 4px 5px 19px 3px #eeeeee;
+	box-shadow: 0px 1px 11px 0px #90A4AE;
 	border: none;
 	position: relative;
 	margin: auto;
@@ -83,15 +56,19 @@ export default {
 }
 
 .image-cropper {
-	width: 200px;
-	height: 200px;
-	position: absolute;
+	width: 100px;
+	height: 100px;
 	overflow: hidden;
-	margin-top: 20px;
-	margin-left: 20px;
 	border-radius: 50%;
 }
-
+#back-btn{
+	float: right;
+    border-radius: 2px;
+    padding: 10px;
+    font-size: 15px;
+    font-family: Helvetica;
+    box-shadow: 0px 1px 5px 0px #d3d3d3;;
+}
 .card-img {
 	display: inline;
 	margin: 0 auto;

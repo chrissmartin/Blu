@@ -71,11 +71,24 @@ export default {
 			firebase
 				.auth().signInWithEmailAndPassword(this.email, this.password).then(
 					user => {
-						user = firebase.auth().currentUser;
-						console.log("EMAIL: " + user.email);
-						//console.log("GETTER",this.$store.getters.getUser);
-						this.$store.dispatch("updateUser", user);
-						console.log("UPDATED", this.$store.getters.getUser.email);
+						const db=firebase.firestore();
+						var userId = firebase.auth().currentUser.uid;
+						var user = db.collection('users').doc(userId);
+						let getDoc = user.get()
+						.then(doc => {
+								if (!doc.exists) {
+								console.log('No such document!');
+								} else {
+
+								this.$store.dispatch("updateUser", doc.data());
+								//console.log("UPDATED-user", this.$store.getters.getUser);								
+								console.log('Document data:', doc.data());
+								}
+							})
+						.catch(err => {
+							console.log('Error getting document', err);
+						});						
+
 						this.$router.push("home");
 						//console.log(guser());
 					},

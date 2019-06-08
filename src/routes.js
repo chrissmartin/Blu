@@ -1,5 +1,5 @@
 import Home from './views/home.vue'
-import Profile from './views/Profile.vue'
+import profile from './views/Profile.vue'
 import Login from './views/Login.vue';
 import SignUp from './views/SignUp.vue';
 
@@ -25,11 +25,8 @@ export const routes= [
   },
   {
     path: '/profile',
-    name: 'Profile',
-    component: Profile,
-    meta: {
-      requiresAuth: true
-    }
+    name: 'profile',
+    component: profile,
   },
   {
     path: '/home',

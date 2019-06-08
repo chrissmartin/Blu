@@ -39,6 +39,9 @@
 				</b-col>
 			</b-row>	
 		</b-container>
+		<div v-if="this.loading === true" style="position: absolute;top: 50%;left: 50%;">
+			<img class="upload-load" src="../assets/giphy.gif">
+			</div>		
 	</div>
 </template>
 
@@ -59,6 +62,7 @@ export default {
 			email: "",
 			password: "",
 			supmode: false,
+			loading: false
 		};
 	},
 	methods: {
@@ -71,25 +75,36 @@ export default {
 			firebase
 				.auth().signInWithEmailAndPassword(this.email, this.password).then(
 					user => {
+						this.loading = true;
 						const db=firebase.firestore();
 						var userId = firebase.auth().currentUser.uid;
 						var user = db.collection('users').doc(userId);
 						let getDoc = user.get()
 						.then(doc => {
 								if (!doc.exists) {
-								console.log('No such document!');
+								console.log('Firestore:No such document!');
 								} else {
-
-								this.$store.dispatch("updateUser", doc.data());
+											if(doc.data().walletId == this.$root.$data.currentAccount)
+											{
+												console.log('Wallet ID Matched with user account');
+												this.$store.dispatch("updateUser", doc.data());
+												this.loading = false;
+												this.$router.push("home");
+											}
+											else{
+												console.log("Invalid WalletId!!")
+												alert('Wallet ID Mismatch')
+												this.$router.push("login");
+												this.loading = false;
+											}
 								//console.log("UPDATED-user", this.$store.getters.getUser);								
-								console.log('Document data:', doc.data());
+								//console.log('Document data:', doc.data());
 								}
 							})
 						.catch(err => {
 							console.log('Error getting document', err);
 						});						
-
-						this.$router.push("home");
+						
 						//console.log(guser());
 					},
 					err => {
@@ -120,7 +135,10 @@ body {
 	
 }
 
-
+.upload-load {
+  width: 50px;
+  height: 50px;
+}
 #small-text{
 	padding-top: 50px;
 	font-weight: 600;

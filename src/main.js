@@ -86,6 +86,7 @@ firebase.auth().onAuthStateChanged(() => {
 			async created() {
 				await this.updateAccount();
 				await this.getPosts();
+
 			},
 			transformToRequire: {
 				img: "src",

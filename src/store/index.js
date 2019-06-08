@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate';
-import * as Cookies from 'js-cookie';
+import VuexPersist from 'vuex-persist';
+
+
 Vue.use(Vuex);
 
 // root state object.
@@ -32,19 +33,15 @@ const state = {
     getUser: state => {return state.user}
   }
   
-  // A Vuex instance is created by combining the state, mutations, actions,
-  // and getters.
- // export default new
-  //export const store = 
+
+  const vuexLocalStorage = new VuexPersist({
+    storage: window.localStorage
+  })
+  
   export const store = new Vuex.Store({
     state,
     getters,
     actions,
     mutations,
-    plugins: [
-      createPersistedState({
-        getState: (key) => Cookies.getJSON(key),
-        setState: (key, state) => Cookies.set(key, state, { expires: 3, secure: true })
-      })
-    ]
+    plugins: [vuexLocalStorage.plugin]
   })

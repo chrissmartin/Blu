@@ -1,5 +1,4 @@
 import Vue from "vue";
-import store from "./store/index";
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -19,6 +18,8 @@ import contract from "./contracts/contractInstance";
 import VueRouter from "vue-router";
 import { routes } from "./routes";
 import firebase from "firebase";
+
+import { store } from "./store";
 //Vue.forceUpdate(); //global declaration
 
 Vue.use(VueRouter);
@@ -34,6 +35,8 @@ Vue.use(FormFile);
 Vue.use(Layout);
 Vue.use(Button);
 Vue.use(Modal);
+
+//LOL LOL
 
 let app = "";
 const config = {
@@ -55,21 +58,21 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-	const currentUser = firebase.auth().user;
+	const currentUser = firebase.auth().currentUser;
 	const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-
 	if (requiresAuth && !currentUser) next("login");
-	else if (!requiresAuth && currentUser) next("home");
+	//else if (!requiresAuth && currentUser) next('home');
 	else next();
 });
+ 
 
 // Vue instance and Session
 firebase.auth().onAuthStateChanged(() => {
 	if (!app) {
 		app = new Vue({
 			el: "#app",
-			router,
 			store,
+			router,
 			data: {
 				currentPosts: [],
 				currentAccount: "",

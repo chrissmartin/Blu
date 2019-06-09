@@ -25,19 +25,16 @@ exports.addUserToDb = functions.auth.user().onCreate(user => {
 
 	const db = admin.firestore();
 
-	var NewData = db
-		.collection("users")
-		.doc(uid)
-		.set({
-			email: email,
-			name: displayName,
-			userId: null,
-			walletId: null,
-			followers: 0,
-			profilePhotoHash: null,
-			verified: false,
-			timestamp: FieldValue.serverTimestamp()
-		}); //returns promise | TODO : handle the promise
+    var NewData =db.collection("users").doc(uid).set({
+        email: email,
+        name : displayName,
+        userId : null,
+        walletId : null,
+        followers: 0,
+        profilePhotoHash:null,
+        verified: false,
+        timestamp: FieldValue.serverTimestamp()
+    }); //returns promise | TODO : handle the promise
 
 	/* var updateTimestamp = db.collection("users").doc(uid).update({
         timestamp: FieldValue.serverTimestamp()

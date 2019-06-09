@@ -1,87 +1,47 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import * as firebase from "firebase";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import VuexPersist from 'vuex-persist';
 
-//import auth from './modules/auth';
 
-//Load Vuex
 Vue.use(Vuex);
 
-//create store
+// root state object.
+// each Vuex instance is just a single state tree.
+const state = {
+    user:"LOL"
+  }
+  
+  // mutations are operations that actually mutates the state.
+  // each mutation handler gets the entire state tree as the
+  // first argument, followed by additional payload arguments.
+  // mutations must be synchronous and can be recorded by plugins
+  // for debugging purposes.
+  const mutations = {
+    updateUser (state,payload) {
+      state.user=payload;
+    }
+  }
+  
+  // actions are functions that cause side effects and can involve
+  // asynchronous operations.
+  const actions = {
+    updateUser: ({commit}, payload) => commit('updateUser',payload) //this.$store.dispatch('updateUser', payload)
+  }
+  
+  // getters are functions
+  const getters = {
+    getUser: state => {return state.user}
+  }
+  
 
-export const store = new Vuex.Store({
-	state: {
-		user: null,
-		loading: false,
-		error: null
-	},
-
-	getters: {
-		user(state) {
-			return state.user;
-		},
-		loading(state) {
-			return state.loading;
-		},
-		error(state) {
-			return state.error;
-		}
-	},
-
-	actions: {
-		signUserUp({ commit }, payload) {
-			commit("setLoading", true);
-			commit("clearError");
-			firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-				.then(user => {
-					commit("setLoading", false);
-					const newUser = {
-						id: user.uid,
-						registeredMeetups: []
-					};
-					commit("setUser", newUser);
-				})
-				.catch(error => {
-					commit("setLoading", false);
-					commit("setError", error);
-					console.log(error);
-				});
-		},
-		signUserIn({ commit }, payload) {
-			commit("setLoading", true);
-			commit("clearError");
-
-			firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-				.then(user => {
-					commit("setLoading", false);
-					const newUser = {
-						id: user.uid
-					};
-					commit("setUser", newUser);
-				})
-				.catch(error => {
-					commit("setLoading", false);
-					commit("setError", error);
-					console.log(error);
-				});
-		},
-		clearError({ commit }) {
-			commit("clearError");
-		}
-	},
-
-	mutations: {
-		setUser(state, payload) {
-			state.user = payload;
-		},
-		setLoading(state, payload) {
-			state.loading = payload;
-		},
-		setError(state, payload) {
-			state.error = payload;
-		},
-		clearError(state) {
-			state.error = null;
-		}
-	}
-});
+  const vuexLocalStorage = new VuexPersist({
+    storage: window.localStorage
+  })
+  
+  export const store = new Vuex.Store({
+    state,
+    getters,
+    actions,
+    mutations,
+    plugins: [vuexLocalStorage.plugin]
+  })

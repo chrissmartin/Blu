@@ -1,6 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 module.exports = {
   entry: './src/main.js',
@@ -20,6 +22,7 @@ module.exports = {
           // other vue-loader options go here
         }
       },
+
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -58,6 +61,7 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
+  
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
@@ -68,7 +72,7 @@ if (process.env.NODE_ENV === 'production') {
     }),
     
     new webpack.LoaderOptionsPlugin({
-      minimize: true
+      minimize: true,
     })
   ])
 }

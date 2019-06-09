@@ -34,7 +34,9 @@
 </template>
 
 <script>
-import ipfs from "../contracts/ipfs";
+
+import ipfs from '../contracts/ipfs';
+
 export default {
 	name: "newPost",
 	// data variables
@@ -127,9 +129,10 @@ export default {
 };
 </script>
 
-<style>
-.modal-content {
-	border: none;
+<style scoped>
+
+.modal-content{
+  border:  none;
 }
 
 #newPost {

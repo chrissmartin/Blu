@@ -4,12 +4,13 @@
 			<b-row>
 				<b-col class="register left d-flex justify-content-center align-middle">
 					<signup v-if="supmode" v-on:after-leave="afterLeave" id="form-text"></signup>
-					<transition name="slide-fade">
+					<transition name="fadeRight">
 						<div v-if="!supmode" id="blugrad">
 							<div id="welcome-text">
-								<h1>WELCOME BACK!</h1>
-								<h6>SIGN IN TO ENTER THE SAFEST SOCIAL MEDIA IN THE WORLD</h6>
-								<h4>NEW HERE?</h4>
+								<h1 style="font-weight: 800; font-size: 70px;">WELCOME<br/>BACK!</h1>
+								<h3 style="font-weight: 300;">SIGN IN</h3>
+								<h6 style="font-weight: 300;">SIGN IN TO ENTER THE SAFEST SOCIAL MEDIA IN THE WORLD</h6>
+								<h4 id="small-text">NEW HERE?</h4>
 								<button @click="supmode=!supmode">Sign Up</button>
 							</div>
 						</div>
@@ -18,43 +19,38 @@
 				<b-col class="signin right d-flex justify-content-center align-middle">
 					<div v-if="!supmode" id="form-text">
 						<h1 class="logo">Blu.</h1>
-						<b-form>
-							<b-form-input
-								id="auth-input"
-								type="email"
-								v-model="form.email"
-								required
-								placeholder="Enter email"
-							/>
-							<b-form-input
-								id="auth-input"
-								type="password"
-								v-model="form.password"
-								required
-								placeholder="Enter password"
-							/>
-							<button @click="onSignin">Login</button>
-						</b-form>
+						<input type="text" v-model="email" placeholder="Email">
+						<br>
+						<input type="password" v-model="password" placeholder="Password">
+						<br>
+						<button @click="login">Login</button>
 					</div>
-					<transition name="slide-fade">
+					<transition name="fadeLeft">
 						<div v-if="supmode" id="blugrad">
 							<div id="welcome-text">
-								<h1>WELCOME BACK!</h1>
-								<h6>SIGN UP TO ENTER THE SAFEST SOCIAL MEDIA IN THE WORLD</h6>
-								<h4>ALREADY A USER?</h4>
+								<h1 style="font-weight: 800; font-size: 70px;">Hello<br/>There!</h1>
+								<h3 style="font-weight: 300;">SIGN UP</h3>
+								<h6 style="font-weight: 300;">SIGN UP TO ENTER THE SAFEST SOCIAL MEDIA IN THE WORLD</h6>
+								<h4 id="small-text">ALREADY A USER?</h4>
 								<button @click="supmode=!supmode">Sign In</button>
 							</div>
 						</div>
 					</transition>
 				</b-col>
-			</b-row>
+			</b-row>	
 		</b-container>
+		<div v-if="this.loading === true" style="position: absolute;top: 50%;left: 50%;">
+			<img class="upload-load" src="../assets/giphy.gif">
+			</div>		
 	</div>
 </template>
 
 <script>
 import firebase from "firebase";
 import signup from "./SignUp.vue";
+//import { mapGetters, mapActions } from "vuex";
+
+require('vue2-animate/dist/vue2-animate.min.css')
 
 export default {
 	name: "login",
@@ -65,45 +61,64 @@ export default {
 		return {
 			email: "",
 			password: "",
-			supmode: false
+			supmode: false,
+			loading: false
 		};
 	},
-	computed: {
-		user() {
-			return this.$store.getters.user;
-		},
-		error() {
-			return this.$store.getters.error;
-		},
-		loading() {
-			return this.$store.getters.loading;
-		}
-	},
-	watch: {
-		user(value) {
-			if (value !== null && value !== undefined) {
-				this.$router.push("/");
-			}
-		}
-	},
 	methods: {
+		//mapActions(['updateUser']),
+
 		afterLeave: function(el) {
 			supmode = !supmode;
 		},
-		onSignin() {
-			this.$store.dispatch("signUserIn", {
-				email: this.email,
-				password: this.password
-			});
+		login: function() {
+			firebase
+				.auth().signInWithEmailAndPassword(this.email, this.password).then(
+					user => {
+						this.loading = true;
+						const db=firebase.firestore();
+						var userId = firebase.auth().currentUser.uid;
+						var user = db.collection('users').doc(userId);
+						let getDoc = user.get()
+						.then(doc => {
+								if (!doc.exists) {
+								console.log('Firestore:No such document!');
+								} else {
+											if(doc.data().walletId == this.$root.$data.currentAccount)
+											{
+												console.log('Wallet ID Matched with user account');
+												this.$store.dispatch("updateUser", doc.data());
+												this.loading = false;
+												this.$router.push("home");
+											}
+											else{
+												console.log("Invalid WalletId!!")
+												alert('Wallet ID Mismatch')
+												this.$router.push("login");
+												this.loading = false;
+											}
+								//console.log("UPDATED-user", this.$store.getters.getUser);								
+								//console.log('Document data:', doc.data());
+								}
+							})
+						.catch(err => {
+							console.log('Error getting document', err);
+						});						
+						
+						//console.log(guser());
+					},
+					err => {
+						alert("Oops. " + err.message);
+					}
+				);
 		},
-		onDismissed() {
-			this.$store.dispatch("clearError");
-		}
+
 	}
 };
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800');
 /* "scoped" attribute limit the CSS to this component only */
 body {
 	margin: 0px;
@@ -115,9 +130,21 @@ body {
 	padding: 0px;
 	position: relative;
 	top: 30%;
+	color: #ffffff;
+	font-family: 'Open Sans', sans-serif;
+	
+}
+
+.upload-load {
+  width: 50px;
+  height: 50px;
+}
+#small-text{
+	padding-top: 50px;
+	font-weight: 600;
 }
 #form-text {
-	position: relative;
+	position: absolute;
 	padding: 0px;
 }
 .logo {
@@ -190,19 +217,19 @@ input {
 	border: none;
 }
 button {
-	width: 120px;
-	position: relative;
-	display: block;
-	margin: 50px auto;
-	padding: 5px 30px;
-	overflow: hidden;
-	border-width: 0;
-	outline: none;
-	border-radius: 7px;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-	background-color: #ffffff;
-	color: #333333;
-	transition: background-color 0.3s;
+    position: relative;
+    display: block;
+    margin: 20px auto;
+    padding: 5px 30px;
+    overflow: hidden;
+    border-width: 0;
+    outline: none;
+    border-radius: 7px;
+    height: 40px;
+    box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.42);
+    background-color: #ffffff;
+    color: #000000a3;
+    transition: background-color 0.3s;
 }
 p {
 	margin-top: 40px;
@@ -214,7 +241,7 @@ p a {
 }
 
 /* Enter and leave animations can use different */
-/* durations and timing functions.              */
+/* durations and timing functions.              
 .slide-fade-enter-active {
 	transition: all 0.3s ease;
 }
@@ -222,9 +249,13 @@ p a {
 .slide-fade-leave-active {
 	transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
+.slide-fade-enter
+/* .slide-fade-leave-active below version 2.1.8  {
 	transform: translateX(10px);
 	opacity: 0;
 }
+.slide-fade-leave-to{
+	transform: translateX(-10px);
+	opacity: 0;
+}*/
 </style>

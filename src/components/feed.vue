@@ -34,7 +34,8 @@
             
           </div>          
           <div>
-              <p class="home-card-text"> Caption : {{ item.caption }}</p>         
+              <p class="home-card-text"> Caption : {{ item.caption }}</p> 
+              
           </div>
           </b-card>
         </li>
@@ -53,7 +54,6 @@ export default {
       selectedUser: '',
     };
   },
-
   methods: {
 
     sendInfo(item) {
@@ -86,7 +86,6 @@ export default {
   width: 500px;
   margin-bottom: 20px;
 }
-
 
 .home-list{
   padding: 0px;

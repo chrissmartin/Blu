@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -20,6 +21,7 @@ module.exports = {
           // other vue-loader options go here
         }
       },
+
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -58,6 +60,7 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
+  
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
@@ -68,7 +71,18 @@ if (process.env.NODE_ENV === 'production') {
     }),
     
     new webpack.LoaderOptionsPlugin({
-      minimize: true
+      minimizer: [new UglifyJsPlugin()],
+      namedModules: false,
+      namedChunks: false,
+      nodeEnv: 'production',
+      flagIncludedChunks: true,
+      occurrenceOrder: true,
+      sideEffects: true,
+      usedExports: true,
+      concatenateModules: true,
+      noEmitOnErrors: true,
+      checkWasmTypes: true,
+      minimize: true,
     })
   ])
 }
